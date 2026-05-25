@@ -1,6 +1,4 @@
-# HOMELAB – Samba Active Directory Lab
-
-Built on Ubuntu Server running in UTM on Apple Silicon.
+# HOMELAB
 
 ## Environment
 
@@ -11,11 +9,11 @@ Gateway: 192.168.64.1
 
 Services:
 - DNS (53)
-- Kerberos / KDC (88)
+- Kerberos (88)
 - LDAP (389)
 - SMB (445)
 
-## Network Diagram
+## Diagram
 
 ```text
                 HOMELAB.INTERNAL
@@ -26,17 +24,14 @@ Services:
       ┌────────────────┴──────────────┐
       │                               │
 ┌─────────────┐             ┌────────────────┐
-│ MacBook Pro │             │ Ubuntu Server │
-│ UTM Host    │ SSH ------> │ labdc1        │
-│             │             │ 192.168.64.10 │
+│ MacBook Pro │ SSH ------> │ labdc1        │
+│ UTM Host    │             │ 192.168.64.10 │
 └─────────────┘             │ Samba AD DC   │
                             │ DNS/KDC/LDAP  │
                             └────────────────┘
 ```
 
 ## Future
-
 - [ ] Windows 11 client
 - [ ] File server
-- [ ] SIEM
 - [ ] Kali VM
