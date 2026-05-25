@@ -24,10 +24,10 @@ Services:
       ┌────────────────┴──────────────┐
       │                               │
 ┌─────────────┐             ┌────────────────┐
-│ MacBook Pro │ SSH ------> │ labdc1         │
-│ UTM Host    │             │ 192.168.64.10  │
-└─────────────┘             │ Samba AD DC    │
-                            │ DNS/KDC/LDAP   │
+│ MacBook Pro │ SSH ------> │ labdc1        │
+│ UTM Host    │             │ 192.168.64.10 │
+└─────────────┘             │ Samba AD DC   │
+                            │ DNS/KDC/LDAP  │
                             └────────────────┘
 ```
 
