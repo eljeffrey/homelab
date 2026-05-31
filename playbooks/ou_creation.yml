@@ -6,7 +6,8 @@
     ous:
       - Servers
       - Workstations
-
+      - groups
+      - users	
   tasks:
     - name: Create OUs
       command: >
