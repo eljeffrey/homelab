@@ -1,0 +1,14 @@
+- name: Create AD OUs
+  hosts: samba
+  gather_facts: false
+
+  vars:
+    ous:
+      - Servers
+      - Workstations
+
+  tasks:
+    - name: Create OUs
+      command: >
+        samba-tool ou create "OU={{ item }},DC=home,DC=internal"
+      loop: "{{ ous }}"
