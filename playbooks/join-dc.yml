@@ -1,0 +1,23 @@
+---
+- hosts: dcs
+  become: yes
+
+  vars_prompt:
+    - name: admin_password
+      prompt: "Domain Administrator Password"
+      private: yes
+
+  tasks:
+
+    - name: Get kerberos ticket
+      shell: |
+        echo '{{ admin_password }}' | kinit Administrator
+      changed_when: false
+
+    - name: Join DC
+      shell: |
+        samba-tool domain join homelab.internal DC \
+        --realm=HOMELAB.INTERNAL \
+        -U Administrator%{{ admin_password }}
+      args:
+        creates: /var/lib/samba/private/sam.ldb

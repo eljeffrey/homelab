@@ -1,0 +1,51 @@
+---
+- hosts: dcs
+  become: yes
+
+  vars:
+    realm: HOMELAB.INTERNAL
+    domain: HOMELAB
+    dc1_ip: 192.168.1.10
+
+  tasks:
+
+    - name: Install packages
+      apt:
+        name:
+          - samba-ad-dc
+          - krb5-user
+          - winbind
+          - smbclient
+          - dnsutils
+        state: present
+        update_cache: yes
+
+    - name: Set hostname
+      hostname:
+        name: labdc2
+
+    - name: Configure hosts file
+      copy:
+        dest: /etc/hosts
+        content: |
+          127.0.0.1 localhost
+          192.168.1.20 labdc2.homelab.internal labdc2
+
+    - name: Configure krb5
+      copy:
+        dest: /etc/krb5.conf
+        content: |
+          [libdefaults]
+              default_realm = HOMELAB.INTERNAL
+              dns_lookup_realm = false
+              dns_lookup_kdc = false
+
+          [realms]
+              HOMELAB.INTERNAL = {
+                  kdc = labdc1.homelab.internal
+                  admin_server = labdc1.homelab.internal
+              }
+
+          [domain_realm]
+              .homelab.internal = HOMELAB.INTERNAL
+              homelab.internal = HOMELAB.INTERNAL
